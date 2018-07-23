@@ -1,14 +1,14 @@
-package br.com.bb.service;
+package br.com.bb.dao;
 
 import br.com.bb.model.Product;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ProductDao {
 
     Product findById(Long id);
 
     List<Product> findAll();
 
-    List<Product> findByCategoryId(long categoryId);
+    List<Product> findByCategoryId(Long categoryId);
 }

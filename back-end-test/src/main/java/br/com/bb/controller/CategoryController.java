@@ -15,16 +15,15 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
-    private CategoryService service = new CategoryService();
+    @Autowired
+    private CategoryService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public Category findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
 
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    @ResponseBody
     public List<Category> findAll() {
         return service.findAll();
     }

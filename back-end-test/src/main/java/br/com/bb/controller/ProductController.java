@@ -1,9 +1,8 @@
 package br.com.bb.controller;
 
-import br.com.bb.model.Category;
 import br.com.bb.model.Product;
-import br.com.bb.service.CategoryService;
 import br.com.bb.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,8 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    private ProductService service = new ProductService();
+    @Autowired
+    private ProductService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
@@ -33,6 +33,6 @@ public class ProductController {
     @RequestMapping(value = "/listByCategory/{categoryId}", method = RequestMethod.GET)
     @ResponseBody
     public List<Product> findByCategoryId(@PathVariable("categoryId") Long categoryId) {
-        return service.findProductsByCategoryId(categoryId);
+        return service.findByCategoryId(categoryId);
     }
 }

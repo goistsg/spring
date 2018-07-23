@@ -24,7 +24,7 @@ public class Category {
     private String name;
 
     //@OneToMany(mappedBy = "account")
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @CollectionTable(name = "products", joinColumns = @JoinColumn(name = "category_id"))
     private List<Product> produtos;
 

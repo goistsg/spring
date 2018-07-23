@@ -1,37 +1,16 @@
 package br.com.bb.service;
 
 import br.com.bb.model.Category;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class CategoryService {
+public interface CategoryService {
 
-    EntityManagerFactory factory = Persistence.createEntityManagerFactory("testdb");
-    EntityManager manager = factory.createEntityManager();
+    Category findById(Long id);
 
-    public Category findById(Long id) {
-        manager.getTransaction().begin();
-
-        Category category = manager.find(Category.class, id);
-
-        manager.getTransaction().commit();
-        manager.close();
-        return  category;
-    }
-
-    public List<Category> findAll() {
-        manager.getTransaction().begin();
-
-        TypedQuery<Category> query = manager.createNamedQuery(Category.FIND_ALL, Category.class);
-        List<Category> listCategory = query.getResultList();
-
-        manager.getTransaction().commit();
-        manager.close();
-        return listCategory.isEmpty() ? new ArrayList<>() : listCategory;
-    }
+    List<Category> findAll();
 }
