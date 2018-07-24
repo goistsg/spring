@@ -45,4 +45,12 @@ public class CategoryControllerTest {
 	        .andExpect(jsonPath("$[2].id", is(3)))
 	        .andExpect(jsonPath("$[2].name", is("Móveis")));
     }
+
+	@Test
+	public void listByCaracterOfName() throws Exception {
+		mockMvc.perform(get("/category/listByCaracterOfName/e"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id", is(2)))
+				.andExpect(jsonPath("$.name", is("Eletrodomésticos")));
+	}
 }

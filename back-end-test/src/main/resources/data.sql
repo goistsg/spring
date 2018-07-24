@@ -1,18 +1,18 @@
 /* Category */
-INSERT INTO categories VALUES(default, 'Alimentos');
-INSERT INTO categories VALUES(default, 'Eletrodomésticos');
-INSERT INTO categories VALUES(default, 'Móveis');
+INSERT INTO categories VALUES(1, 'Alimentos');
+INSERT INTO categories VALUES(2, 'Eletrodomésticos');
+INSERT INTO categories VALUES(3, 'Móveis');
 
 /* Product Alimentos */
-INSERT INTO products VALUES(default, 'Arroz', (select id from categories where name = 'Alimentos'));
-INSERT INTO products VALUES(default, 'Feijão', (select id from categories where name = 'Alimentos'));
+INSERT INTO products VALUES(1, 'Arroz', 1);
+INSERT INTO products VALUES(2, 'Feijão', 1);
 
 /* Product Eletrodomésticos */
-INSERT INTO products VALUES(default, 'Aspirador de pó', (select id from categories where name = 'Eletrodomésticos'));
-INSERT INTO products VALUES(default, 'Batedeira', (select id from categories where name = 'Eletrodomésticos'));
-INSERT INTO products VALUES(default, 'Liquidificador', (select id from categories where name = 'Eletrodomésticos'));
+INSERT INTO products VALUES(3, 'Aspirador de pó', 2);
+INSERT INTO products VALUES(4, 'Batedeira', 2);
+INSERT INTO products VALUES(5, 'Liquidificador', 2);
 
 /* Product Móveis */
-INSERT INTO products VALUES(default, 'Sofá', (select id from categories where name = 'Móveis'));
-INSERT INTO products VALUES(default, 'Mesa', (select id from categories where name = 'Móveis'));
-INSERT INTO products VALUES(default, 'Estante', (select id from categories where name = 'Móveis'));
+INSERT INTO products VALUES(6, 'Sofá', 3);
+INSERT INTO products VALUES(7, 'Mesa', 3);
+INSERT INTO products VALUES(8, 'Estante', 3);

@@ -4,14 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-@NamedQueries({
-        @NamedQuery(name=Product.FIND_ALL, query="SELECT p FROM Product p ORDER BY p.id"),
-        @NamedQuery(name=Product.FIND_BY_CATEGORY, query="SELECT p FROM Product p WHERE p.category = :category ORDER BY p.id")
-})
 public class Product {
-
-    public static final String FIND_ALL = "Product.findAll";
-    public static final String FIND_BY_CATEGORY = "Product.findByCategory";
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

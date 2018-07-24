@@ -1,21 +1,12 @@
 package br.com.bb.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.util.Assert;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
-@NamedQueries({
-    @NamedQuery(name=Category.FIND_ALL, query="SELECT c FROM Category c ORDER BY c.id")
-})
 public class Category {
-
-    public static final String FIND_ALL = "Category.findAll";
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -24,8 +15,7 @@ public class Category {
     private String name;
 
     //@OneToMany(mappedBy = "account")
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @CollectionTable(name = "products", joinColumns = @JoinColumn(name = "category_id"))
+    @OneToMany
     private List<Product> produtos;
 
     public Category() { super(); }

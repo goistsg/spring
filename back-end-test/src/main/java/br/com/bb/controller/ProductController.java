@@ -1,38 +1,35 @@
 package br.com.bb.controller;
 
 import br.com.bb.model.Product;
-import br.com.bb.service.ProductService;
+import br.com.bb.model.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
+@ResponseBody
 @RequestMapping("/product")
 public class ProductController {
 
     @Autowired
-    private ProductService service;
+    private ProductRepository service;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/{id}")
     public Product findById(@PathVariable("id") Long id) {
-        return service.findById(id);
+        return service.findOne(id);
     }
 
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/listAll")
     public List<Product> findAll() {
-        return service.findAll();
+        return (List<Product>) service.findAll();
     }
 
-    @RequestMapping(value = "/listByCategory/{categoryId}", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/listByCategory/{categoryId}")
     public List<Product> findByCategoryId(@PathVariable("categoryId") Long categoryId) {
-        return service.findByCategoryId(categoryId);
+        List<Product> listProducts = (List<Product>) service.findAll();
+        return listProducts.stream().filter(product -> product.getCategory().getId() == categoryId).collect(Collectors.toList());
     }
 }
