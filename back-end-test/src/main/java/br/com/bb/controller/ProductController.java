@@ -1,6 +1,7 @@
 package br.com.bb.controller;
 
 import br.com.bb.model.Product;
+import br.com.bb.service.ProductRepository;
 import br.com.bb.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,23 +17,20 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductService service;
+    private ProductRepository service;
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/{id}")
     public Product findById(@PathVariable("id") Long id) {
-        return service.findById(id);
+        return service.findOne(id);
     }
 
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/listAll")
     public List<Product> findAll() {
-        return service.findAll();
+        return (List<Product>) service.findAll();
     }
 
-    @RequestMapping(value = "/listByCategory/{categoryId}", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/listByCategory/{categoryId}")
     public List<Product> findByCategoryId(@PathVariable("categoryId") Long categoryId) {
-        return service.findByCategoryId(categoryId);
+        return service.findAllBy(categoryId);
     }
 }

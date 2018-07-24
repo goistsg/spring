@@ -5,17 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "categories")
-@NamedQueries({
-    @NamedQuery(name=Category.FIND_ALL, query="SELECT c FROM Category c ORDER BY c.id")
-})
-public class Category {
+public class Category implements Serializable {
 
-    public static final String FIND_ALL = "Category.findAll";
+    private static final long serialVersionUID = -3009157732242254769L;
+    //public static final String FIND_ALL = "Category.findAll";
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,9 +22,7 @@ public class Category {
 
     private String name;
 
-    //@OneToMany(mappedBy = "account")
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @CollectionTable(name = "products", joinColumns = @JoinColumn(name = "category_id"))
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> produtos;
 
     public Category() { super(); }
@@ -63,6 +60,10 @@ public class Category {
 
     @Override
     public String toString() {
-        return String.format("Category [id=%s, name=%s]", id, name);
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", produtos=" + produtos +
+                '}';
     }
 }

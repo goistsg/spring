@@ -1,17 +1,13 @@
 package br.com.bb.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "products")
-@NamedQueries({
-        @NamedQuery(name=Product.FIND_ALL, query="SELECT p FROM Product p ORDER BY p.id"),
-        @NamedQuery(name=Product.FIND_BY_CATEGORY, query="SELECT p FROM Product p WHERE p.category = :category ORDER BY p.id")
-})
-public class Product {
+public class Product implements Serializable {
 
-    public static final String FIND_ALL = "Product.findAll";
-    public static final String FIND_BY_CATEGORY = "Product.findByCategory";
+    private static final long serialVersionUID = -3009157732242241606L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -58,6 +54,10 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("Product [id=%s, name=%s, category=%s]", id, name, category.getName());
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                '}';
     }
 }
